@@ -24,6 +24,7 @@
 \newcommand{\T}{Tomas}
 \newcommand{\J}{Joel}
 \newcommand{\says}[2][gg]{\vspace{0.5em}\noindent\hangindent=0.5cm{\textsc{#1}}: #2}
+\newcommand{\appears}[3][gg]{\vspace{0.5em}\noindent\hangindent=0.5cm{\textsc{#1}} (\emph{#2}): #3}
 
 \begin{document}
 
@@ -296,7 +297,7 @@ pointed this out in 1979 \cite{demillo-1979-proofs}! They believed that formal v
 
 \says[\J]{Tomas, remind me, didn't you run into a problem in your thesis with the intersection of provable and interesting things?}
 
-\says[\T]{Well, you remember correctly. There was a point in my PhD when I realized that all the things I could prove about my programming langauge were not that interesting and all the things that I found interesting about programming were not particularly formalizable or provable. I guess I was getting increasingly interested in what people sometimes call ``programming experience'' research.\footnote{The topic is the subject of the Programming Experience workshop (https://programming-experience.org) that has been running since 2016.} The experience also made me think much more about research methodology and led me to interest in history and philosophy of science.}
+\says[\T]{Well, you remember correctly. There was a point in my PhD when I realized that all the things I could prove about my programming langauge were not that interesting and all the things that I found interesting about programming were not particularly formalizable or provable. I guess I was getting increasingly interested in what people sometimes call ``programming experience'' research.\footnote{The topic is the subject of the Programming Experience workshop\\ (https://programming-experience.org) that has been running since 2016.} The experience also made me think much more about research methodology and led me to interest in history and philosophy of science.}
 
 \says[\J]{Does that shed any light on why programming langauge researchers are so focused on formalization and proofs?}
 
@@ -311,8 +312,10 @@ pointed this out in 1979 \cite{demillo-1979-proofs}! They believed that formal v
 \says[\T]{But what kind of knowledge structure can give you such conceptual clarity, without being as detailed as a formal model?}
 
 \begin{figure}[t]
+\vspace{-0.5em}
 \centering
 \begin{subfigure}{0.49\textwidth}
+  \centering
    \noindent
    \includegraphics[scale=0.3]{figures/mm1.png}
    \caption{Time versus number of workers:\\Perfectly partionable task}
@@ -320,6 +323,7 @@ pointed this out in 1979 \cite{demillo-1979-proofs}! They believed that formal v
 \end{subfigure}
 \hfill
 \begin{subfigure}{0.49\textwidth}
+  \centering
    \noindent
    \includegraphics[scale=0.3]{figures/mm2.png}
    \caption{Time vs. number of workers:\\Task with complex inter-relationships}
@@ -327,50 +331,91 @@ pointed this out in 1979 \cite{demillo-1979-proofs}! They believed that formal v
 \end{subfigure}
 \caption{Two illustrations by Brooks showing how communication overhead means that adding workforce to a delayed project makes things worse (from~\cite{brooks-1975-manmonth})}
 \label{fig:mm}
+\vspace{-0.5em}
 \end{figure}
 
 \says[\J]{You made a reference to Fred Brooks earlier. I think his other essay ``The Mythical Man-Month'' \cite{brooks-1975-manmonth} is a good example. In the essay, Brooks explains why adding more workforce to a delayed project only makes the delay worse. The argument is based on analysing the amount of communication that needs to happen (Figure~\ref{fig:mm}). For a perfectly partitionable programming task, adding people helps. But if the work requires communication, the overhead of the communication grows exponentially as people are added, eventually overtaking the gain you get from the linear growth of people who can do the programming. Brooks illustrates this with charts and equations. He does not have formal proofs or specific numbers, but the model provides a good theory that provides conceptual clarity.}
 
-\says[\T]{Interesting, this kind of reasoning seems to be quite common in software engineering. I can think of another example from a book about the history of anti-ballistic missile systems \cite{slayton-2013-arguments}. One of the arguments for why such system cannot be reliably built was based on comparing the rate of change in the environment and the rate of change of the system. The argument was that the US cannot build a reliable defence system, because changing the software is more work than changing the characteristic of the Soviet ballistic missile. Again, this is a somewhat mathematical argument that provides conceptual clarity.}
+\says[\T]{Interesting, this kind of reasoning seems to be quite common in software engineering. I can think of another example from a book about the history of anti-ballistic missile systems \cite{slayton-2013-arguments}. One of the arguments for why such system cannot be reliably built was based on comparing the rate of change in the environment and the rate of change of the system. The idea was that the US cannot build a reliable defence system, because changing the software is more work than changing some of the characteristic of the Soviet ballistic missile. Again, this is a somewhat mathematical argument that provides conceptual clarity.}
 
-\says[\J]{Right. I think we can refer to such models that provide conceptual clarity protot-theories and I would say that we need more thinking like this! They can be later refined to more formal modles, but not prematurely. I would also add that mathematical formulations like those above are not the only kinds of proto-theories we should be creating.}
+\says[\J]{Right. I think we can refer to such models that provide conceptual clarity \emph{proto-theories}. I would say that we need more thinking like this! They can be later refined to more formal modles, but not prematurely. I would also add that mathematical formulations like those above are not the only kinds of proto-theories we should be creating.}
 
-\says[\T]{So what would be a useful proto-theory for thinking about programming systems?}
+\says[\T]{So what would be a useful proto-theory about programming systems?}
+
 \section{Technical dimensions of programming systems}
 
-\says[\J]{Well, a good place to start would be the published framework of ``technical dimensions'' which break down programming systems into narrower properties of which they can have more or less.}
+\says[\J]{Well, a good place to start would be the published framework of ``technical dimensions''
+\cite{jakubovic-2023-techdims} which break down programming systems into narrower properties of which they can have more or less.}
 
 \says[\T]{Dimensions? That rings a bell...}
 
 \says[\J]{You're thinking of the Cognitive Dimensions of Notations \cite{green-1990-cogdims} which was the main inspiration. However, the Technical Dimensions are concerned with the programming system as a whole, not just its notation.}
 
-\says[\T]{I see! How does such a framework contribute to making programming easier?}
+\says[\T]{I can see how you capture various properties of notations. They can be more or less
+  dense, more or less consistent, more or less easy to modify etc. But what kind of properties
+  can you capture as dimensions about programming systems in general?}
 
-\says[\J]{By providing a way for us to actually learn something from the vast range of programming systems that aren't necessarily languages. It is a set of common points of reference that allow for an apples-to-apples comparison of widely differing software systems.}
+\says[\J]{The list is quite long and I do not think it is complete, but it includes some of the
+  characteristics of programming systems that we have talked about alread. For example,
+  \emph{modes of interaction} captures whether you do everything in a single environment or
+  whether ``using'' is distinct from ``programming''; \emph{notational structure} captures whether
+  there is just a single adaptable notation or a range of different ones; \emph{self-sustainability}
+  captures the degree to which the system can be modified from within itself and so on.}
 
-\says[\T]{OK. Is this meant to supersede programming language research methods?}
+\says[\T]{Just to get back to our original question, how does such a framework contribute to making programming easier?}
 
-\says[\J]{Not at all. Since many programming systems contain a programming language, all existing PL research is applicable to their syntax, semantics, types, paradigms, and so on. The Technical Dimensions simply establish the analogues of those concepts for the other parts of those systems.}
+\says[\J]{Remember Figure~\ref{fig:langsys}, which illustrated that we know how to study programming languages, but not how to study programming systems? Well, many people came up with interesting programming systems that make programming easier in some way. But because we lacked a good way for talking about them, the ideas were never clearly described and nobody was able to adopt them and develop them further.}
 
-\says[\J]{Behold: clusters of technical dimensions down the side, and programming systems along the top. Each cell is a concise account of how the system measures against those dimensions.}
+\says[\T]{I guess what you are saying is that technical dimensions of programming systems gives us a set of common points of reference that allow for apples-to-apples comparison of widely different programming systems? But is this meant to supersede the existing programming language research methods?}
 
-\says[\T]{This is so informal! How does this help?}
+\says[\J]{Not at all. Since many programming systems contain a programming language, all existing programming language research is applicable to their syntax, semantics, types, paradigms, and so on. The technical dimensions simply establish the analogues of those concepts for the other parts of those systems.}
 
-\says[\J]{The full realisation of the aims of the framework is a long-term research program. What we have already is the seed to start it off. We have suggested a set of dimensions and described each one qualitatively. Future work, as set out towards the end of my dissertation, involves making these descriptions more precise and possibly even qualtifiable.}
+\says[\T]{Didn't you link the shift from thinking about programming langauges to thinking about programming systems to the idea of Kuhnian scientific revolution before?}
 
-\says[\T]{Quantifiable? Does this risk the problem we mentioned about formalizable vs. interesting properties?}
+\says[\J]{Well, yes. If this really was a scientific revolution, then the shift to thinking about programming systems would put more emphasis on research methods that can talk about them in their full complexity. It would not invalidate programming language theory, but it would certainly make it less relevant. However, we are quite far from what Kuhn called ``normal science''. It is still early days for programming systems research!}
+
+\says[\T]{What do you think still needs to be done? I have to say that, compared to established programming language research methods, the work on technical dimensions seems quite informal!}
+
+\says[\J]{Right. The full realisation of the aims of the framework is a long-term research program. What we have already is the seed to start it off. We have a set of dimensions that come with a qualitative description each. Future work, as set out towards the end of my dissertation, involves making these descriptions more precise and possibly even qualtifiable.}
+
+\says[\T]{Quantifiable? Does this risk the problem we mentioned about focusing on what is formalizable rather than on what is interesting?}
 
 \says[\J]{That spectre is always hanging over it, yes. But the solution is to refine the framework slowly and carefully, with input and critique from the research community. This is why the dimensions were published in their qualitative state; better to grit our teeth and endure the informality, than to prematurely formalise before we know what we're doing! Just the fact that we're breaking down programming systems into a common vocabulary of properties to focus on, helps to analyse programming systems and compare them with each other. It also means we can map the design space of possible systems and spot combinations of properties that haven't been tried yet.}
 
-\says[\T]{Aha, so while you have been outlining the future work for interested ``theoreticians'', the future work for ``experimentalists'' would be filling the database of how different systems fit into the framework.}
+\says[\T]{It is funny to hear us discussing the theoretical framework of programming systems, after we complained about the scientific bias in favour of theoretical work! You have just outlined the future work for interested ``theoreticians'', but the future work for ``experimentalists'' should be at least as important. I guess the experimental work should be filling the database of how different systems fit into the framework.}
 
-\says[\J]{Exactly - there is a lot of what Kuhn called ``normal science'' waiting to be done here.}
+\says[\J]{That is certainly one task for the experimentalists. But they can also explore the design space to find new designs. To get back to our original motivation of making programming easier, one of the chapters in my thesis aims to explore programming systems that have three properties: \emph{notational freedom}, which would give you the kind of adaptable substrate we talked about,
+\emph{explicit structure}, which is a pre-condition for building such substrate and
+\emph{self-sustainability}, which would make it possible to evolve and improve the system from
+within itself, enabling a virtuous cycle of self-improvement.}
 
 \section{Conclusions}
 
+\appears[Alan]{arrives in his festive Christmas jumper}{\textsc{Ho Ho Ho!} It is nice to see you! What have you two been chatting about here?}
+
+\says[\T]{Well, Joel was practicing the elevator pitch for his PhD thesis, but I suppose we got a bit distracted and ended up talking about whether it is possible for programming to be easier, whether there are any fundamental limits of that and also what kind of research methodology can get us there!}
+
+\says[Alan]{And what did you conclude?}
+
+\says[\J]{On a more general level, we agreed that we need more thinking about interactive, stateful programming systems and their characteristics. Programming can only become easier if we start thinking about how programming systems are used. In other words, think more about \emph{programming systems} than about \emph{programming languages}. Today, this is tricky, because we lack the right vocabulary for talking abotu programming systems, but the technical dimensions is a useful \emph{proto-theory} that serves as the starting point!}
+
+\says[Alan]{And on the more specific level?}
+
+\says[\J]{Well, we do not have a concrete system yet, but we believe it will have a number of general properties. It needs to be built around a programming substrate that can grow with the user. It should make it easy to make small changes to the system, but also allow making more complex and harder to make changes. We also need to think about programming as gradual adaptation, to overcome the Brooks' ``doom prophecy'' of essential complexity. But I remain optimistic.}
+
+\says[\T]{My tongue-in-cheek suggestion is that your
+\emph{Concepts in Programming Languages} module should become
+\emph{Concepts in Programming Systems}! We need a new generation of programming systems researchers who will adopt this new way of thinking about programming and come up with great new theories and experimental systems!}
+
+\says[Alan]{So, what do you think the next generation of Computer Lab programming systems PhD students should be doing?}
+
+\says[\J]{I would love to see more research that looks at how programming languages are embedded in broader stateful interactive systems. This is something where we are lacking both theory and new interesting design ideas. I also think programming researchers should look at things that we do not really see as programming languages. What is it that makes systems like Excel, but also Flash, Hypercard or game engines work well as programming tools? We also need to be more fearless in looking at problems that are interesting, but informal. If we are to study informal properties that are not simply true or false, we will also need more focus on finding consensus among researchers working on programming tools, such as agreeing on the right proto-theories on which to further advance our work.\footnote{A recent seminar also focused on the problem of developing new ``theories of programming'' \cite{latoza-2023-theories}. However, we believe that a theory needs to start as an informal proto-theory and that strong scientific framing in terms of hypotheses may inhibit progress.}}
 
 \begin{credits}
-\subsubsection{\ackname} Omitted for initial submission. \\ This study was supported by X (grant number Y).
+\subsubsection{\ackname}
+The events portrayed in this essay are entirely fictional. Any resemblance to actual persons, living or dead, is purely coincidental. But we are grateful to the non-fictional people who participated in a lively discussion at Mycroftfest and helped to shape this essay.
+~
+This study was supported by X (grant number Y).
 \end{credits}
 
 \bibliographystyle{splncs04}
